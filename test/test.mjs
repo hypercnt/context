@@ -29,7 +29,8 @@ export default [
       const el = createContainer()
       const Component = props => context => h('div', { id: 'component' }, ['foo'])
       const view = (state, actions) => h('main', {}, [h(Component, {}, [])])
-      const a = app({}, {}, view, el)
+      app({}, {}, view, el)
+
       await step
 
       return el.innerHTML
@@ -63,7 +64,9 @@ export default [
         return h(Passthru, {}, [])
       }
       app({}, {}, view, el)
+
       await step
+
       return el.innerHTML
     },
     expect: '<p><span id="foo">bar</span></p>',
@@ -79,7 +82,9 @@ export default [
       const view = _ =>
         h('main', {}, [h(Context, { foo: 'foo', bar: 'bar' }, [h(Passthru1, {}, [])])])
       app({}, {}, view, el)
+
       await step
+
       return el.innerHTML
     },
     expect: '<main><section><div id="foo"><p><span>bar</span></p></div></section></main>',
@@ -99,6 +104,7 @@ export default [
       app({}, {}, view, el)
 
       await step
+
       return el.innerHTML
     },
     expect: '<main><span>foobazbop</span><span>foobar</span></main>',
